@@ -15,6 +15,7 @@ func main() {
 	app :=  cli.NewApp()
 	app.Name = "mydocker"
 	app.Usage = usage
+	app.Version = "1.0.0"
 
 	app.Commands = []cli.Command{
 		initCommand,

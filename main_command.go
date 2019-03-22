@@ -10,7 +10,7 @@ import (
 
 var runCommand = cli.Command{
 	Name: "run",
-	Usage: `Create a container with namespace and cgroups limit docker run -ti [image] [command]`,
+	Usage: `Create a container with namespace and cgroups limit docker run -ti [command]`,
 	Flags: []cli.Flag{
 		cli.BoolFlag{
 			Name: "ti",
@@ -63,8 +63,7 @@ var runCommand = cli.Command{
 			cmdArray = append(cmdArray, arg)
 		}
 
-		//imageName := cmdArray[0]
-		cmdArray = cmdArray[1:]
+		cmdArray = cmdArray[0:]
 
 		createTty := context.Bool("ti")
 		detach := context.Bool("d")
@@ -85,15 +84,13 @@ var runCommand = cli.Command{
 	},
 }
 
-
+// 初始化命令行
 var initCommand = cli.Command{
 	Name: "init",
 	Usage: "Init container process run user's process in container. Do not call it outside",
 	Action: func(context *cli.Context) error {
 		log.Infof("init come on")
-		cmd := context.Args().Get(0)
-		log.Infof("command %s", cmd)
-		err := container.RunContainerInitProcess(cmd, nil)
+		err := container.RunContainerInitProcess()
 		return err
 	},
 }

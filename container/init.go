@@ -34,6 +34,7 @@ func RunContainerInitProcess() error {
 }
 
 func readUserCommand() []string {
+	// 3代表文件描述符，因为进程默认带有3个文件描述符
 	pipe := os.NewFile(uintptr(3), "pipe")
 	defer pipe.Close()
 	msg, err := ioutil.ReadAll(pipe)

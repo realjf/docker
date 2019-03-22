@@ -14,13 +14,13 @@ func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
 		return nil, nil
 	}
 
-	initCmd, err := os.Readlink("/proc/self/exe")
-	if err != nil {
-		log.Errorf("get init process error %v", err)
-		return nil, nil
-	}
+	//initCmd, err := os.Readlink("/proc/self/exe")
+	//if err != nil {
+	//	log.Errorf("get init process error %v", err)
+	//	return nil, nil
+	//}
 
-	cmd := exec.Command(initCmd, "init")
+	cmd := exec.Command("/proc/self/exe", "init")
 	cmd.SysProcAttr = &syscall.SysProcAttr{
 		Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID | syscall.CLONE_NEWNS | syscall.CLONE_NEWNET | syscall.CLONE_NEWIPC,
 	}
@@ -28,8 +28,6 @@ func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
 		cmd.Stdin = os.Stdin
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
-	} else {
-
 	}
 
 	cmd.ExtraFiles = []*os.File{readPipe}

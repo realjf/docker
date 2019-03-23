@@ -68,6 +68,9 @@ var runCommand = cli.Command{
 		createTty := context.Bool("ti")
 		detach := context.Bool("d")
 
+		// 把volume参数传给Run函数
+		volume := context.String("v")
+
 		if createTty && detach {
 			return fmt.Errorf("ti and d paramter can not both provided")
 		}
@@ -79,7 +82,7 @@ var runCommand = cli.Command{
 		}
 		log.Infof("createTty %v", createTty)
 
-		Run(createTty, cmdArray, resConf)
+		Run(createTty, cmdArray, resConf, volume)
 		return nil
 	},
 }

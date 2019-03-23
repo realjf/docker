@@ -17,4 +17,3 @@ func commitContainer(containerName, imageName string) {
 		log.Errorf("Tar folder %s error %v", mntURL, err)
 	}
 }
-

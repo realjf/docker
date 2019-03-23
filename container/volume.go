@@ -27,7 +27,7 @@ func NewWorkSpace(rootURL string, mntURL string, volume string) {
 }
 
 // 解析volume字符串
-func volumeUrlExtract(volume string) ([]string) {
+func volumeUrlExtract(volume string) []string {
 	var volumeURLs []string
 	volumeURLs = strings.Split(volume, ":")
 	return volumeURLs
@@ -153,7 +153,7 @@ func DeleteMountPoint(rootURL string, mntURL string) {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
-		log.Errorf("%v",err)
+		log.Errorf("%v", err)
 	}
 	if err := os.RemoveAll(mntURL); err != nil {
 		log.Errorf("Remove dir %s error %v", mntURL, err)

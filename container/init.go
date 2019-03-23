@@ -2,13 +2,13 @@ package container
 
 import (
 	"fmt"
+	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"syscall"
-	log "github.com/sirupsen/logrus"
 )
 
 func RunContainerInitProcess() error {

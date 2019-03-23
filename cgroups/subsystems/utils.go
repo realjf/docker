@@ -19,7 +19,7 @@ func FindCgroupMountpoint(subsystem string) string {
 	for scanner.Scan() {
 		txt := scanner.Text()
 		fields := strings.Split(txt, " ")
-		for _, opt := range strings.Split(fields[len(fields) -1], ",") {
+		for _, opt := range strings.Split(fields[len(fields)-1], ",") {
 			if opt == subsystem {
 				return fields[4]
 			}
@@ -38,7 +38,7 @@ func GetCgroupPath(subsystem string, cgroupPath string, autoCreate bool) (string
 		if os.IsNotExist(err) {
 			if err := os.Mkdir(path.Join(cgroupRoot, cgroupPath), 0755); err == nil {
 
-			}else{
+			} else {
 				return "", fmt.Errorf("error create cgroup %v", err)
 			}
 		}

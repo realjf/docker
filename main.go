@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/urfave/cli"
 	log "github.com/sirupsen/logrus"
+	"github.com/urfave/cli"
 	"os"
 )
 
@@ -12,7 +12,7 @@ const usage = `mydocker is a simple container runtime implementation.
 				Enjoy it, just for fun.`
 
 func main() {
-	app :=  cli.NewApp()
+	app := cli.NewApp()
 	app.Name = "mydocker"
 	app.Usage = usage
 	app.Version = "1.0.0"

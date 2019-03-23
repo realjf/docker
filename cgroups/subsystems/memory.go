@@ -9,7 +9,6 @@ import (
 )
 
 type MemorySubSystem struct {
-
 }
 
 func (s *MemorySubSystem) Set(cgroupPath string, res *ResourceConfig) error {
@@ -21,7 +20,7 @@ func (s *MemorySubSystem) Set(cgroupPath string, res *ResourceConfig) error {
 			}
 		}
 		return nil
-	}else {
+	} else {
 		return err
 	}
 }
@@ -52,4 +51,3 @@ func (s *MemorySubSystem) Apply(cgroupPath string, pid int) error {
 func (s *MemorySubSystem) Name() string {
 	return "memory"
 }
-

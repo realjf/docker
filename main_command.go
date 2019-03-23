@@ -9,47 +9,47 @@ import (
 )
 
 var runCommand = cli.Command{
-	Name: "run",
+	Name:  "run",
 	Usage: `Create a container with namespace and cgroups limit docker run -ti [command]`,
 	Flags: []cli.Flag{
 		cli.BoolFlag{
-			Name: "ti",
+			Name:  "ti",
 			Usage: "enable tty",
 		},
 		cli.BoolFlag{
-			Name: "d",
+			Name:  "d",
 			Usage: "detach container",
 		},
 		cli.StringFlag{
-			Name: "m",
+			Name:  "m",
 			Usage: "memory limit",
 		},
 		cli.StringFlag{
-			Name: "cpushare",
+			Name:  "cpushare",
 			Usage: "cpushare limit",
 		},
 		cli.StringFlag{
-			Name: "cpuset",
+			Name:  "cpuset",
 			Usage: "cpuset limit",
 		},
 		cli.StringFlag{
-			Name: "name",
+			Name:  "name",
 			Usage: "container name",
 		},
 		cli.StringFlag{
-			Name: "v",
+			Name:  "v",
 			Usage: "volume",
 		},
 		cli.StringSliceFlag{
-			Name: "e",
+			Name:  "e",
 			Usage: "set environment",
 		},
 		cli.StringFlag{
-			Name: "net",
+			Name:  "net",
 			Usage: "container network",
 		},
 		cli.StringSliceFlag{
-			Name: "p",
+			Name:  "p",
 			Usage: "port mapping",
 		},
 	},
@@ -68,15 +68,14 @@ var runCommand = cli.Command{
 		createTty := context.Bool("ti")
 		detach := context.Bool("d")
 
-
 		if createTty && detach {
 			return fmt.Errorf("ti and d paramter can not both provided")
 		}
 
 		resConf := &subsystems.ResourceConfig{
 			MemoryLimit: context.String("m"),
-			CpuSet: context.String("cpuset"),
-			CpuShare: context.String("cpushare"),
+			CpuSet:      context.String("cpuset"),
+			CpuShare:    context.String("cpushare"),
 		}
 		log.Infof("createTty %v", createTty)
 
@@ -90,7 +89,7 @@ var runCommand = cli.Command{
 
 // 初始化命令行
 var initCommand = cli.Command{
-	Name: "init",
+	Name:  "init",
 	Usage: "Init container process run user's process in container. Do not call it outside",
 	Action: func(context *cli.Context) error {
 		log.Infof("init come on")
@@ -100,7 +99,7 @@ var initCommand = cli.Command{
 }
 
 var listCommand = cli.Command{
-	Name: "ps",
+	Name:  "ps",
 	Usage: "list all the containers",
 	Action: func(context *cli.Context) error {
 		ListContainers()
@@ -109,8 +108,8 @@ var listCommand = cli.Command{
 }
 
 var logCommand = cli.Command{
-	Name: "logs",
-	Usage:"print logs of a container",
+	Name:  "logs",
+	Usage: "print logs of a container",
 	Action: func(context *cli.Context) error {
 		if len(context.Args()) < 1 {
 			return fmt.Errorf("Please input your container name")
@@ -122,7 +121,7 @@ var logCommand = cli.Command{
 }
 
 var commitCommand = cli.Command{
-	Name: "commit",
+	Name:  "commit",
 	Usage: "commit a container into image",
 	Action: func(context *cli.Context) error {
 		if len(context.Args()) < 2 {

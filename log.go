@@ -25,4 +25,3 @@ func logContainer(containerName string) {
 	}
 	fmt.Fprint(os.Stdout, string(content))
 }
-
